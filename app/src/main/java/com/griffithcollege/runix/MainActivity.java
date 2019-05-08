@@ -1,6 +1,5 @@
 package com.griffithcollege.runix;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -119,13 +118,14 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_settings) // SETTINGS
         {
             // From StatsActivity to SettingsActivity
-            // TO DO
+            Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
+            finish();
+            startActivity(intent);
         }
         else if (id == R.id.nav_about) // ABOUT
         {
             // From StatsActivity to AboutActivity
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            finish();
+            Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

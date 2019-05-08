@@ -9,4 +9,7 @@
     <string name="main_title">Welcome, John Doe</string>
     <string name="training">Last training : 30/03/2019</string>
     <string name="title_activity_stats">StatsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+    <string name="about"><b>Runix</b> (for <i>Run</i> + <i>Unix</i>) is an application designed by Tom-Eliott <i>Find3r</i> and Edward <i>tipchef</i> Cacioppo, engineering students at EPITA, as part of their studies at Griffith College Dublin. \n \n Made with ❤️ in Dublin </string>
 </resources>

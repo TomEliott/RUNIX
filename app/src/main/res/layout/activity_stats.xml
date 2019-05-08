@@ -21,6 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/side_nav_bar"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+
         </android.support.v7.widget.Toolbar>
 
         <include layout="@layout/content_stats" />
