@@ -1,6 +1,7 @@
 package com.griffithcollege.runix;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,9 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class StatsActivity extends MainActivity
 {
@@ -32,16 +37,20 @@ public class StatsActivity extends MainActivity
                         .setAction("Action", null).show();
             }
         });
+
+
+        // Set up TextView & Data
+        AverageSpeed();
+        TotalDistance();
     }
 
     public void ToolbarStat()
     {
         Toolbar toolbar = findViewById(R.id.toolbarStat);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.logo);
-
+        getSupportActionBar().setLogo(R.drawable.ic_runix_icon);
 
         //Button Open Menu
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stat_layout);
@@ -53,6 +62,39 @@ public class StatsActivity extends MainActivity
         //Navigation View
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void AverageSpeed()
+    {
+        // Recuperation of speed values
+        // TO DO
+
+        // Calculation of average speed
+        // TO DO
+
+        // Change TextView
+        String averagespeed_str = "Average Speed : 12 km/h";
+        SpannableString averagespeed_str_4textview =  new SpannableString(averagespeed_str);
+        averagespeed_str_4textview.setSpan(new RelativeSizeSpan(1.5f), 15, averagespeed_str.length(), 0); // Set the size
+        //averagespeed_str_4textview.setSpan(new ForegroundColorSpan(Color.RED), 15, averagespeed_str.length(), 0); // Set the color
+        TextView textView_AverageSpeed = findViewById(R.id.AverageSpeed);
+        textView_AverageSpeed.setText(averagespeed_str_4textview);
+    }
+
+    public void TotalDistance()
+    {
+        // Recuperation of distance
+        // TO DO
+
+        // Calculation of total distance
+        // TO DO
+
+        // Change TextView
+        String totaldistance_str = "Total Distance\n 42 km";
+        SpannableString totaldistance_str_4textview =  new SpannableString(totaldistance_str);
+        totaldistance_str_4textview.setSpan(new RelativeSizeSpan(2.1f), 16, totaldistance_str.length(), 0);
+        TextView textView_TotalDistance = findViewById(R.id.TotalDistance);
+        textView_TotalDistance.setText(totaldistance_str_4textview);
     }
 
     // MENU AREA
