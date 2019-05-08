@@ -2,11 +2,9 @@ package com.griffithcollege.runix;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,74 +12,121 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-public class StatsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
+public class StatsActivity extends MainActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stats_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_stats);
+        ToolbarStat(); // Generation of Stats' Toolbar
+
+        //Floating Action Button
+        FloatingActionButton fab = findViewById(R.id.share);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+    public void ToolbarStat()
+    {
+        Toolbar toolbar = findViewById(R.id.toolbarStat);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.logo);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //Button Open Menu
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stat_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        //Navigation View
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    // MENU AREA
+    @Override
+    public void onBackPressed()
+    {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stat_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings)
+        {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    // MAIN MENU
-    public boolean onNavigationItemSelected(MenuItem item)
+    public boolean onNavigationItemSelected (MenuItem item)
     {
         int id = item.getItemId();
-        if (id == R.id.nav_home) // HOME
+        if (id == R.id.nav_home) // STATS -> HOME
         {
-            // From StatsActivity to MainActivity
-            Intent intent = new Intent(StatsActivity.this, MainActivity.class);
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);
         }
-        else if (id == R.id.nav_stats) // STATS
+        else if (id == R.id.nav_stats) // STATS -> STATS
         {
-            // From StatsActivity to StatsActivity
-            Intent intent = new Intent(StatsActivity.this, StatsActivity.class);
-            finish();
-            startActivity(intent);
+            // Nothing
         }
-        else if (id == R.id.nav_tips) // TIPS (feature)
+        else if (id == R.id.nav_tips) // STATS -> TIPS
         {
-            // From StatsActivity to TipsActivity
-            // TO DO
+            // To Do
         }
-        else if (id == R.id.nav_maps) // MAPS (feature)
+        else if (id == R.id.nav_maps) // STATS -> MAPS
         {
-            // From StatsActivity to MapsActivity
-            // TO DO
+            // To Do
         }
-        else if (id == R.id.nav_settings) // SETTINGS
+        else if (id == R.id.nav_settings) // STATS -> SETTINGS
         {
-            // From StatsActivity to SettingsActivity
-            // TO DO
+            // To Do
         }
-        else if (id == R.id.nav_about) // ABOUT
+        else if (id == R.id.nav_about) // STATS -> ABOUT
         {
             // From StatsActivity to AboutActivity
-            Intent intent = new Intent(StatsActivity.this, AboutActivity.class);
+            Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             finish();
             startActivity(intent);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stat_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;

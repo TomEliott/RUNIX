@@ -1,5 +1,6 @@
 package com.griffithcollege.runix;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,16 +19,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
     @Override
-
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.logo);
+        ToolbarMain(); // Generation of Main's Toolbar
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.start);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +33,15 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    public void ToolbarMain()
+    {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    // MENU AREA
     @Override
     public void onBackPressed()
     {
@@ -85,7 +91,6 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    // MAIN MENU
     public boolean onNavigationItemSelected(MenuItem item)
     {
         // Handle navigation view item clicks here.
@@ -93,12 +98,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) // HOME
         {
             // From StatsActivity to MainActivity
-            // Already in MainActivity
         }
         else if (id == R.id.nav_stats) // STATS
         {
             // From StatsActivity to StatsActivity
-            Intent intent = new Intent(MainActivity.this, StatsActivity.class);
+            Intent intent = new Intent(getBaseContext(), StatsActivity.class);
             finish();
             startActivity(intent);
         }
