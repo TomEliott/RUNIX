@@ -10,12 +10,12 @@
         android:id="@+id/about_returnhome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
         android:elevation="0dp"
-        app:backgroundTint="@android:color/white"
+        app:backgroundTint="@android:color/holo_blue_dark"
         app:elevation="0dp"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
     <TextView
         android:id="@+id/AppName"

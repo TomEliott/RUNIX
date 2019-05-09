@@ -12,4 +12,55 @@
     <string name="title_activity_about">AboutActivity</string>
 
     <string name="about"><b>Runix</b> (for <i>Run</i> + <i>Unix</i>) is an application designed by Tom-Eliott <i>Find3r</i> and Edward <i>tipchef</i> Cacioppo, engineering students at EPITA, as part of their studies at Griffith College Dublin. \n \n Made with ❤️ in Dublin </string>
+
+    <string-array name="tips_titles">
+        <item>The Specifity Rule</item> <!-- Tips N°1 -->
+        <item>The 10-Percent Rule</item> <!-- Tips N°2 -->
+        <item>The 2-Hour Rule</item> <!-- Tips N°3 -->
+        <item>The 10-Minute Rule</item> <!-- Tips N°4 -->
+        <item>The 2-Day Rule</item> <!-- Tips N°5 -->
+        <item>The Familiar-Food Rule</item> <!-- Tips N°6 -->
+        <item>The Race-Recovery Rule</item> <!-- Tips N°7 -->
+        <item>The Heads-Beats-Tails Rule</item> <!-- Tips N°8 -->
+        <item>The Conversation Rule</item> <!-- Tips N°9 -->
+        <item>The 20-Mile Rule</item> <!-- Tips N°10 -->
+        <item>The Carbs Rule</item> <!-- Tips N°11 -->
+        <item>The Seven-Year Rule</item> <!-- Tips N°12 -->
+        <item>The Left-Side-Of-The-Road Rule</item> <!-- Tips N°13 -->
+        <item>The Up-Beats-Down Rule</item> <!-- Tips N°14 -->
+        <item>The Sleep Rule</item> <!-- Tips N°15 -->
+        <item>The Refueling Rule</item> <!-- Tips N°16 -->
+        <item>The Do not-Just-Run Rule</item> <!-- Tips N°17 -->
+        <item>The Even-Pace-Rule</item> <!-- Tips N°18 -->
+        <item>The New-Shoes-Rule</item> <!-- Tips N°19 -->
+        <item>The Hard/Easy Rule</item> <!-- Tips N°20 -->
+    </string-array>
+
+    <string-array name="tips_messages">
+        <item>TOFIX</item> <!-- Tips N°1 -->
+        <item>TOFIX</item> <!-- Tips N°2 -->
+        <item>TOFIX</item> <!-- Tips N°3 -->
+        <item>TOFIX</item> <!-- Tips N°4 -->
+        <item>TOFIX</item> <!-- Tips N°5 -->
+        <item>TOFIX</item> <!-- Tips N°6 -->
+        <item>TOFIX</item> <!-- Tips N°7 -->
+        <item>TOFIX</item> <!-- Tips N°8 -->
+        <item>TOFIX</item> <!-- Tips N°9 -->
+        <item>TOFIX</item> <!-- Tips N°10 -->
+        <item>TOFIX</item> <!-- Tips N°11 -->
+        <item>TOFIX</item> <!-- Tips N°12 -->
+        <item>TOFIX</item> <!-- Tips N°13 -->
+        <item>TOFIX</item> <!-- Tips N°14 -->
+        <item>TOFIX</item> <!-- Tips N°15 -->
+        <item>TOFIX</item> <!-- Tips N°16 -->
+        <item>TOFIX</item> <!-- Tips N°17 -->
+        <item>TOFIX</item> <!-- Tips N°18 -->
+        <item>TOFIX</item> <!-- Tips N°19 -->
+        <item>TOFIX</item> <!-- Tips N°20 -->
+    </string-array>
+
+
+
+
+
 </resources>

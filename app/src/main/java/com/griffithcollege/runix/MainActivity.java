@@ -232,7 +232,8 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_tips) // TIPS (feature)
         {
             // From MainActivity to TipsActivity
-            // TO DO
+            Intent intent = new Intent(getBaseContext(), TipsActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_maps) // MAPS (feature)
         {

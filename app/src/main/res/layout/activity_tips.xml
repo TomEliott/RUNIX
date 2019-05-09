@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ActivityTipsID"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".TipsActivity">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/tips_returnhome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:elevation="0dp"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:elevation="0dp"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/newtip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:elevation="0dp"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:elevation="0dp"
+        app:srcCompat="@android:drawable/stat_notify_sync" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+    <TextView
+        android:id="@+id/tipsNumber"
+        android:layout_width="match_parent"
+        android:layout_height="29dp"
+        android:layout_marginTop="30dp"
+        android:text="Tip number"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tipsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Tip title"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tipsMessage"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Tip message"
+        android:textAlignment="center"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/tipsNotice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="TextView"
+        android:textAlignment="center" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

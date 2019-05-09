@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StatsActivity extends MainActivity
 {
@@ -125,49 +126,58 @@ public class StatsActivity extends MainActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        if (id == R.id.SettingsMenu)
         {
+            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
+                    "indicating your name.");
             return true;
         }
-
+        if (id == R.id.AboutMenu)
+        {
+            Intent intent = new Intent(getBaseContext(), AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected (MenuItem item)
+    public boolean onNavigationItemSelected(MenuItem item)
     {
         int id = item.getItemId();
-        if (id == R.id.nav_home) // STATS -> HOME
+        if (id == R.id.nav_home) // HOME
         {
+            // From StatsActivity to MainActivity
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             finish();
             startActivity(intent);
         }
-        else if (id == R.id.nav_stats) // STATS -> STATS
+        else if (id == R.id.nav_stats) // STATS
         {
-            // Nothing
+            // From StatsActivity to StatsActivity
         }
-        else if (id == R.id.nav_tips) // STATS -> TIPS
+        else if (id == R.id.nav_tips) // TIPS (feature)
         {
-            // To Do
+            // From StatsActivity to TipsActivity
+            // TO DO
         }
-        else if (id == R.id.nav_maps) // STATS -> MAPS
+        else if (id == R.id.nav_maps) // MAPS (feature)
         {
-            // To Do
+            // From StatsActivity to MapsActivity
+            // TO DO
         }
-        else if (id == R.id.nav_settings) // STATS -> SETTINGS
+        else if (id == R.id.nav_settings) // SETTINGS
         {
-            // To Do
+            ChangeUsername("Settings", "Personalize RUNIX's experience by indicating your name.");
         }
-        else if (id == R.id.nav_about) // STATS -> ABOUT
+        else if (id == R.id.nav_about) // ABOUT
         {
             // From StatsActivity to AboutActivity
             Intent intent = new Intent(getBaseContext(), AboutActivity.class);
-            finish();
             startActivity(intent);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.stat_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;

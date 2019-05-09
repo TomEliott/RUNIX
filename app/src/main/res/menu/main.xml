@@ -2,17 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/SettingsMenu"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Settings"
         app:showAsAction="never" />
-
-    <EditText
-        android:id="@+id/Username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
+    <item
+        android:id="@+id/AboutMenu"
+        android:orderInCategory="100"
+        android:title="About"
+        app:showAsAction="never" />
 </menu>

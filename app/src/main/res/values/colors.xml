@@ -5,4 +5,9 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="black_overlay">#66000000</color>
+
+
+    <!-- COLORS FOR TIPSACTIVITY-->
+    <color name="test">#66000000</color>
+
 </resources>
