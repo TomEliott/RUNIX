@@ -11,8 +11,6 @@ import org.xmlpull.v1.XmlSerializer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,8 +34,9 @@ public class GPXParser {
         try {
             DataGPS data = new DataGPS();
             Double latitude;
-            Double longitute;
-            Double elevation;
+            Double longitude;
+            Double altitude;
+            Float speed;
             Date date;
             XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
@@ -49,12 +48,14 @@ public class GPXParser {
                 if (eventType == XmlPullParser.START_TAG){
                     if(parser.getName().equals("trkpt")){
                         latitude = Double.valueOf(parser.getAttributeValue(0));
-                        longitute = Double.valueOf(parser.getAttributeValue(1));
+                        longitude = Double.valueOf(parser.getAttributeValue(1));
                         parser.next();
-                        elevation = Double.valueOf(parser.nextText());
+                        altitude = Double.valueOf(parser.nextText());
+                        parser.next();
+                        speed = Float.valueOf(parser.nextText());
                         parser.next();
                         date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(parser.nextText());
-                        data.add(latitude,longitute,elevation,date);
+                        data.add(latitude,longitude,altitude, speed, date);
                     }
                 }
                 eventType = parser.next();
@@ -86,8 +87,11 @@ public class GPXParser {
                 gpxSerializer.attribute("","lat",temp.getmLatitude().toString());
                 gpxSerializer.attribute("","lon",temp.getmLongitude().toString());
                 gpxSerializer.startTag("","ele");
-                gpxSerializer.text(temp.getmElevation().toString());
+                gpxSerializer.text(temp.getmAltitude().toString());
                 gpxSerializer.endTag("","ele");
+                gpxSerializer.startTag("","speed");
+                gpxSerializer.text(temp.getmSpeed().toString());
+                gpxSerializer.endTag("","speed");
                 gpxSerializer.startTag("","time");
                 gpxSerializer.text(dateFormat.format(temp.getmTime()));
                 gpxSerializer.endTag("","time");

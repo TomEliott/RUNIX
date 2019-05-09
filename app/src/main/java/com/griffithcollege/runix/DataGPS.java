@@ -11,8 +11,8 @@ public class DataGPS {
         this.data = new LinkedList<>();
     }
 
-    public void add(Double latitude, Double longitude, Double elevation, Date time){
-        DataPoint dataPoint = new DataPoint(latitude, longitude, elevation, time);
+    public void add(Double latitude, Double longitude, Double altitude, Float speed, Date time){
+        DataPoint dataPoint = new DataPoint(latitude, longitude, altitude, speed, time);
         data.add(dataPoint);
     }
 
@@ -27,13 +27,15 @@ public class DataGPS {
     public class DataPoint {
         private  Double mLatitude;
         private  Double mLongitude;
-        private  Double mElevation;
+        private  Double mAltitude;
+        private Float mSpeed;
         private  Date mTime;
 
-        DataPoint(Double latitude, Double longitude, Double elevation, Date time){
+        DataPoint(Double latitude, Double longitude, Double altitude, Float Speed, Date time){
             this.mLatitude = latitude;
             this.mLongitude = longitude;
-            this.mElevation = elevation;
+            this.mAltitude = altitude;
+            this.mSpeed = Speed;
             this.mTime = time;
         }
 
@@ -45,12 +47,16 @@ public class DataGPS {
             return mLongitude;
         }
 
-        public Double getmElevation() {
-            return mElevation;
+        public Double getmAltitude() {
+            return mAltitude;
         }
 
         public Date getmTime() {
             return mTime;
+        }
+
+        public Float getmSpeed() {
+            return mSpeed;
         }
     }
 }
