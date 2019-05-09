@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Chronometer;
 
 import java.io.File;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity
 
     LocationManager lm;
     GPSLocationListener gps;
+    boolean isStart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,16 +41,44 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Chronometer RunixChrono = findViewById(R.id.Chrono);
+
         ToolbarMain(); // Generation of Main's Toolbar
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.start);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final FloatingActionButton start = (FloatingActionButton) findViewById(R.id.start);
+        final FloatingActionButton stop = (FloatingActionButton) findViewById(R.id.stop);
+
+        start.setClickable(true);
+        stop.setClickable(false);
+
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view)
+            {
+                // Chrono
+                isStart = true;
+
+                RunixChrono.start();
+                RunixChrono.setFormat("%s");
+                start.setClickable(false);
+                stop.setClickable(true);
             }
         });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                start.setClickable(true);
+                stop.setClickable(false);
+
+                RunixChrono.stop();
+                String time = RunixChrono.getFormat();
+
+                isStart = false;
+            }
+        });
+
     }
 
     public void ToolbarMain()
