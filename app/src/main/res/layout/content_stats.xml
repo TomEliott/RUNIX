@@ -15,6 +15,11 @@
         app:backgroundTint="@color/design_default_color_primary_dark"
         app:srcCompat="@android:drawable/ic_menu_share" />
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +48,19 @@
             android:text="30 mars 2019 à 17h42"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"/>
+
+        <com.griffithcollege.runix.Graph
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="#ccc"
+            android:paddingLeft="20dp"
+            android:paddingBottom="40dp"
+            app:exampleColor="#33b5e5"
+            app:exampleDimension="24sp"
+            app:exampleDrawable="@android:drawable/stat_notify_sync"
+            app:exampleString="Votai Test." />
 
         <TextView
             android:id="@+id/AverageSpeed"
@@ -100,6 +117,7 @@
             android:layout_height="79dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/time_rectangle"
             android:gravity="center"
             android:padding="8dp"
@@ -107,6 +125,8 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="15dp" />
+
     </LinearLayout>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

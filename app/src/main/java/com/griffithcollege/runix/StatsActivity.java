@@ -38,7 +38,6 @@ public class StatsActivity extends MainActivity
             }
         });
 
-
         // Set up TextView & Data
         AverageSpeed();
         TotalDistance();
