@@ -1,6 +1,8 @@
 package com.griffithcollege.runix;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -20,10 +22,15 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    LocationManager lm;
+    GPSLocationListener gps;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState)
     {
+        lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         String GPStracks = "GPStracks";
 
         File f = new File(Environment.getExternalStorageDirectory(), GPStracks);
@@ -138,5 +145,19 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    public void gpsStart(View view) {
+        gps = new GPSLocationListener();
+        try {
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public void gpsStop(View view){
+        lm.removeUpdates(gps);
+        gps = null;
     }
 }

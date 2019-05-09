@@ -53,7 +53,7 @@ public class GPXParser {
                         parser.next();
                         elevation = Double.valueOf(parser.nextText());
                         parser.next();
-                        date = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").parse(parser.nextText());
+                        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(parser.nextText());
                         data.add(latitude,longitute,elevation,date);
                     }
                 }
@@ -71,7 +71,7 @@ public class GPXParser {
 
     public void writeGPX(DataGPS data, String filename){
         XmlSerializer gpxSerializer = Xml.newSerializer();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try{
             File GPX = getGPXFile(filename);
             FileOutputStream out = new FileOutputStream(GPX);
