@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
@@ -35,10 +36,13 @@ public class MainActivity extends AppCompatActivity
     boolean isReady = false;
     boolean usernameChanged = false;
     String user = "Anonymous";
+    String filename;
+    GPXParser parser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        parser = new GPXParser();
         lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         String GPStracks = "GPStracks";
 
@@ -73,6 +77,11 @@ public class MainActivity extends AppCompatActivity
                 }
                 // Chrono + Status
                 RunixChrono.setBase(SystemClock.elapsedRealtime());
+                Date c = Calendar.getInstance().getTime();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+                String formattedDate = df.format(c);
+                filename = formattedDate + ".gpx";
+                gpsStart();
                 RunixChrono.start();
                 start.setClickable(false);
                 stop.setClickable(true);
@@ -88,6 +97,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view)
             {
                 // Status + Chrono + Buttons
+                gpsStop();
                 start.setClickable(true);
                 stop.setClickable(false);
                 RunixChrono.stop();
@@ -257,7 +267,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void gpsStart(View view) {
+    public void gpsStart() {
         gps = new GPSLocationListener();
         try {
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
@@ -266,8 +276,9 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void gpsStop(View view){
+    public void gpsStop(){
         lm.removeUpdates(gps);
+        parser.writeGPX(gps.getData(),filename);
         gps = null;
     }
 }
