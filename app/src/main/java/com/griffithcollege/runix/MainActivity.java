@@ -1,7 +1,10 @@
 package com.griffithcollege.runix;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,12 +17,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    LocationManager lm;
+    GPSLocationListener gps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+        String GPStracks = "GPStracks";
+
+        File f = new File(Environment.getExternalStorageDirectory(), GPStracks);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ToolbarMain(); // Generation of Main's Toolbar
@@ -132,5 +149,19 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    public void gpsStart(View view) {
+        gps = new GPSLocationListener();
+        try {
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
+        } catch (SecurityException se) {
+            se.printStackTrace();
+        }
+    }
+
+    public void gpsStop(View view){
+        lm.removeUpdates(gps);
+        gps = null;
     }
 }
