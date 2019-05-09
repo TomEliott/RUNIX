@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity
     LocationManager lm;
     GPSLocationListener gps;
     boolean isReady = false;
+    boolean usernameChanged = false;
+    String user = "Anonymous";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +68,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+                if (!usernameChanged)
+                {
+                    ChangeUsername("One More Thing",
+                            "Before starting a new running activity, please enter your "
+                                    + "name to personalize RUNIX's experience.");
+                    usernameChanged = true;
+                }
                 // Chrono + Status
                 RunixChrono.setBase(SystemClock.elapsedRealtime());
                 RunixChrono.start();
@@ -81,7 +90,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-
                 // Status + Chrono + Buttons
                 start.setClickable(true);
                 stop.setClickable(false);
@@ -119,6 +127,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void ChangeUsername(String title, String message)
+    {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(title);
+        alert.setMessage(message);
+
+        final EditText name = new EditText(this);
+        alert.setView(name);
+        final TextView username = findViewById(R.id.UsernameDisplay);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                user = name.getText().toString();
+                username.setText("Welcome, "+user+" !");
+            }
+        });
+
+        alert.setNegativeButton("Anonymous Mode", new DialogInterface.OnClickListener()
+        {
+            // Anonymous mode is used when the user does not want to communicate his name
+            public void onClick(DialogInterface dialog, int whichButton)
+            {
+                user = "Anonymous";
+                username.setText("Welcome, "+user+" user !");
+            }
+        });
+        alert.show();
     }
 
     // MENU AREA
@@ -194,26 +233,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_settings) // SETTINGS
         {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Settings");
-            alert.setMessage("Personalize RUNIX's experience by indicating your name.");
-
-            final EditText name = new EditText(this);
-            alert.setView(name);
-            final TextView username = findViewById(R.id.UsernameDisplay);
-
-            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int whichButton)
-                { username.setText("Welcome, "+name.getText().toString()+" !"); }
-            });
-
-            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog, int whichButton)
-                { } // Canceled
-            });
-            alert.show();
+            ChangeUsername("Settings", "Personalize RUNIX's experience by indicating your name.");
         }
         else if (id == R.id.nav_about) // ABOUT
         {
