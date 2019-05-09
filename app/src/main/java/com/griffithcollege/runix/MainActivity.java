@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,8 +23,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +30,6 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
-
     LocationManager lm;
     GPSLocationListener gps;
     boolean isReady = false;
@@ -47,9 +43,8 @@ public class MainActivity extends AppCompatActivity
         String GPStracks = "GPStracks";
 
         File f = new File(Environment.getExternalStorageDirectory(), GPStracks);
-        if (!f.exists()) {
-            f.mkdirs();
-        }
+        if (!f.exists())
+        { f.mkdirs(); }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -64,7 +59,8 @@ public class MainActivity extends AppCompatActivity
         start.setClickable(true);
         stop.setClickable(false);
 
-        start.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -86,7 +82,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        stop.setOnClickListener(new View.OnClickListener() {
+        stop.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -108,7 +105,6 @@ public class MainActivity extends AppCompatActivity
                 isReady = true;
             }
         });
-
     }
 
     public void ToolbarMain()
@@ -145,6 +141,7 @@ public class MainActivity extends AppCompatActivity
             {
                 user = name.getText().toString();
                 username.setText("Welcome, "+user+" !");
+                usernameChanged = true;
             }
         });
 
@@ -155,6 +152,7 @@ public class MainActivity extends AppCompatActivity
             {
                 user = "Anonymous";
                 username.setText("Welcome, "+user+" user !");
+                usernameChanged = true;
             }
         });
         alert.show();
@@ -189,10 +187,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.SettingsMenu)
+        {
+            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
+                    "indicating your name.");
             return true;
         }
-
+        if (id == R.id.AboutMenu)
+        {
+            Intent intent = new Intent(getBaseContext(), AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -204,11 +210,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_home) // HOME
         {
-            // From StatsActivity to MainActivity
+            // From MainActivity to MainActivity
         }
         else if (id == R.id.nav_stats) // STATS
         {
-            // From StatsActivity to StatsActivity
+            // From MainActivity to StatsActivity
 
             if (isReady)
             {
@@ -218,26 +224,29 @@ public class MainActivity extends AppCompatActivity
             }
             else
             {
-                Toast.makeText(getApplicationContext(), "Please complete the current running activity before accessing your statistics.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please complete the current " +
+                        "running activity before accessing your " +
+                        "statistics.", Toast.LENGTH_SHORT).show();
             }
         }
         else if (id == R.id.nav_tips) // TIPS (feature)
         {
-            // From StatsActivity to TipsActivity
+            // From MainActivity to TipsActivity
             // TO DO
         }
         else if (id == R.id.nav_maps) // MAPS (feature)
         {
-            // From StatsActivity to MapsActivity
+            // From MainActivity to MapsActivity
             // TO DO
         }
         else if (id == R.id.nav_settings) // SETTINGS
         {
-            ChangeUsername("Settings", "Personalize RUNIX's experience by indicating your name.");
+            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
+                    "indicating your name.");
         }
         else if (id == R.id.nav_about) // ABOUT
         {
-            // From StatsActivity to AboutActivity
+            // From MainActivity to AboutActivity
             Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             startActivity(intent);
         }
