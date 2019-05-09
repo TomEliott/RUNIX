@@ -1,10 +1,13 @@
 package com.griffithcollege.runix;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -17,8 +20,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Chronometer;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -26,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     LocationManager lm;
     GPSLocationListener gps;
-    boolean isStart = false;
+    boolean isReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         final FloatingActionButton start = (FloatingActionButton) findViewById(R.id.start);
         final FloatingActionButton stop = (FloatingActionButton) findViewById(R.id.stop);
+        final TextView status = findViewById(R.id.Status);
 
         start.setClickable(true);
         stop.setClickable(false);
@@ -55,13 +66,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                // Chrono
-                isStart = true;
-
+                // Chrono + Status
+                RunixChrono.setBase(SystemClock.elapsedRealtime());
                 RunixChrono.start();
-                RunixChrono.setFormat("%s");
                 start.setClickable(false);
                 stop.setClickable(true);
+                status.setText("Running activity in progress...");
+
+                isReady = false;
             }
         });
 
@@ -69,13 +81,23 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
+
+                // Status + Chrono + Buttons
                 start.setClickable(true);
                 stop.setClickable(false);
-
                 RunixChrono.stop();
-                String time = RunixChrono.getFormat();
+                String time = RunixChrono.getText().toString();
+                RunixChrono.setBase(SystemClock.elapsedRealtime());
+                start.setImageResource(R.drawable.ic_restart); // For the next restart
 
-                isStart = false;
+                // Last update (from navigation tab)
+                TextView last_training = findViewById(R.id.LastTrainingTextView);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm");
+                String current_time = sdf.format(new Date());
+                last_training.setText("Last running : "+current_time);
+                status.setText("Last running time : "+time);
+
+                isReady = true;
             }
         });
 
@@ -148,9 +170,17 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_stats) // STATS
         {
             // From StatsActivity to StatsActivity
-            Intent intent = new Intent(getBaseContext(), StatsActivity.class);
-            finish();
-            startActivity(intent);
+
+            if (isReady)
+            {
+                Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                finish();
+                startActivity(intent);
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Please complete the current running activity before accessing your statistics.", Toast.LENGTH_SHORT).show();
+            }
         }
         else if (id == R.id.nav_tips) // TIPS (feature)
         {
@@ -164,10 +194,26 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_settings) // SETTINGS
         {
-            // From StatsActivity to SettingsActivity
-            Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
-            finish();
-            startActivity(intent);
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Settings");
+            alert.setMessage("Personalize RUNIX's experience by indicating your name.");
+
+            final EditText name = new EditText(this);
+            alert.setView(name);
+            final TextView username = findViewById(R.id.UsernameDisplay);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int whichButton)
+                { username.setText("Welcome, "+name.getText().toString()+" !"); }
+            });
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int whichButton)
+                { } // Canceled
+            });
+            alert.show();
         }
         else if (id == R.id.nav_about) // ABOUT
         {
