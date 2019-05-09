@@ -5,15 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".StatsActivity">
 
+    <!-- FILE TO DELETE AFTER -->
+
     <com.griffithcollege.runix.Graph
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:id="@+id/GraphCustomView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:background="#ccc"
         android:paddingLeft="20dp"
         android:paddingBottom="40dp"
         app:exampleColor="#33b5e5"
         app:exampleDimension="24sp"
-        app:exampleDrawable="@android:drawable/ic_menu_add"
-        app:exampleString="Hello, Graph" />
+        app:exampleDrawable="@android:drawable/stat_notify_sync"
+        app:exampleString="Votai Test." />
 
 </FrameLayout>
