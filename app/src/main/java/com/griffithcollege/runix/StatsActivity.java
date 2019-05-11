@@ -33,7 +33,6 @@ public class StatsActivity extends MainActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
         super.onCreate(savedInstanceState);

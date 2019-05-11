@@ -1,5 +1,9 @@
 package com.griffithcollege.runix;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.LinkedList;
+
 public class Statistics
 {
     DataGPS data;
@@ -71,5 +75,33 @@ public class Statistics
             min = Math.min(min, data.get(i).getmAltitude());
         }
         return min;
+    }
+
+    public LinkedList<Float> timePoint(){
+        LinkedList<Float> timePoint = new LinkedList<>();
+        timePoint.add(0f);
+        for (int i = 1; i < data.size(); i++) {
+            timePoint.add(timeBetweenCurrentAndFirstPoints(i));
+        }
+        return timePoint;
+    }
+
+    public Float timeBetweenCurrentAndFirstPoints (int index){
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        DataGPS.DataPoint firstPoint = data.get(0);
+        DataGPS.DataPoint indexPoint = data.get(index);
+        Long result = (indexPoint.getmTime().getTime() - firstPoint.getmTime().getTime())/1000;
+        return(Float.valueOf(df.format(result)));
+    }
+
+    public LinkedList<Float> speedPoint(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        LinkedList<Float> timeSpeed = new LinkedList<>();
+        for (int i = 1; i < data.size(); i++) {
+            timeSpeed.add(Float.valueOf(df.format(data.get(i).getmSpeed())));
+        }
+        return timeSpeed;
     }
 }
