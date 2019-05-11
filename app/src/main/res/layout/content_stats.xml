@@ -34,22 +34,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:fontFamily="sans-serif-black"
-            android:text="My last training"
+            android:text="My statistics"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
-
-        <TextView
-            android:id="@+id/msgLastTraining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="sans-serif-black"
-            android:text="30 mars 2019 à 17h42"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:layout_marginBottom="10dp"/>
 
         <com.griffithcollege.runix.Graph
             android:id="@+id/GraphCustomView"

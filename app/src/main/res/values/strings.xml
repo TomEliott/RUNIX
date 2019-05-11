@@ -37,26 +37,26 @@
     </string-array>
 
     <string-array name="tips_messages">
-        <item>TOFIX</item> <!-- Tips N°1 -->
-        <item>TOFIX</item> <!-- Tips N°2 -->
-        <item>TOFIX</item> <!-- Tips N°3 -->
-        <item>TOFIX</item> <!-- Tips N°4 -->
-        <item>TOFIX</item> <!-- Tips N°5 -->
-        <item>TOFIX</item> <!-- Tips N°6 -->
-        <item>TOFIX</item> <!-- Tips N°7 -->
-        <item>TOFIX</item> <!-- Tips N°8 -->
-        <item>TOFIX</item> <!-- Tips N°9 -->
-        <item>TOFIX</item> <!-- Tips N°10 -->
-        <item>TOFIX</item> <!-- Tips N°11 -->
-        <item>TOFIX</item> <!-- Tips N°12 -->
-        <item>TOFIX</item> <!-- Tips N°13 -->
-        <item>TOFIX</item> <!-- Tips N°14 -->
-        <item>TOFIX</item> <!-- Tips N°15 -->
-        <item>TOFIX</item> <!-- Tips N°16 -->
-        <item>TOFIX</item> <!-- Tips N°17 -->
-        <item>TOFIX</item> <!-- Tips N°18 -->
-        <item>TOFIX</item> <!-- Tips N°19 -->
-        <item>TOFIX</item> <!-- Tips N°20 -->
+        <item>The most effective training mimics the event for which you’re training. This is the cardinal rule of training for any activity. If you want to run a 10K at seven-minute-per-mile pace, you need to do some running at that pace. “Runners are best served by running at goal pace and in the expected environment of that race,” says Ann Snyder, Ph.D., director of the human performance lab at the University of Wisconsin-Milwaukee.</item> <!-- Tips N°1 -->
+        <item>Increase weekly training mileage by no more than 10 percent per week. Joe Henderson, the first editor of Runner’s World, and Joan Ullyot, M.D., author of several running books, first popularized the 10-percent prescription in the 1980s. “I noticed that runners who increased their training load too quickly were incurring injuries,” says Dr. Ullyot.</item> <!-- Tips N°2 -->
+        <item>Wait for about two hours after a meal before running. “For most people, two hours is enough time for food to empty from the stomach, especially if it’s high in carbohydrate,” says Colorado sports dietitian and marathoner Cindy Dallow, Ph.D. “If you don’t wait long enough, food will not be properly digested, raising the risk of abdominal cramps, bloating, and even vomiting.</item> <!-- Tips N°3 -->
+        <item>Start every run with 10 minutes of walking and slow running, and do the same to cool down. “A warmup prepares your body for exercise by gradually increasing blood flow and raising core muscle temperature,” says Jerry Napp, a Tampa Bay running coach. “The cooldown may be even more important. Stopping abruptly can cause leg cramps, nausea, dizziness, or fainting.”</item> <!-- Tips N°4 -->
+        <item>If something hurts for two straight days while running, take two days off. Two straight days of pain may signal the beginning of an injury. “Even taking five days of complete rest from running will have little impact on your fitness level,” says Troy Smurawa, M.D.</item> <!-- Tips N°5 -->
+        <item>Don’t eat or drink anything new before or during a race or hard workout. Stick to what works for you. “Your gastrointestinal tract becomes accustomed to a certain mix of nutrients,” says Dallow. “You can normally vary this mix without trouble, but you risk indigestion when prerace jitters are added.”</item> <!-- Tips N°6 -->
+        <item>For each mile that you race, allow one day of recovery before returning to hard training or racing. That means no speed workouts or racing for six days after a 10K or 26 days after a marathon. The rule’s originator was the late Jack Foster, the masters marathon world record holder (2:11:18) from 1974 to 1990. Foster wrote in his book, Tale of the Ancient Marathoner, “My method is roughly to have a day off racing for every mile I raced.”</item> <!-- Tips N°7 -->
+        <item>A headwind always slows you down more than a tailwind speeds you up. So expect to run slower on windy days. “I disregard the watch on really windy days because headwinds cost me 15 to 25 seconds a mile, and I only get a portion of that back after I turn around,” says Monte Wells, a longtime runner in Amarillo, Texas, America’s windiest city. “The key is to monitor your effort, not your pace. Start against the wind, so it’s at your back in the second half.”</item> <!-- Tips N°8 -->
+        <item>You should be able to talk in complete sentences while running. One study found that runners whose heart and breathing rates were within their target aerobic zones could comfortably recite the Pledge of Allegiance. Those who couldn’t were running faster than optimal.</item> <!-- Tips N°9 -->
+        <item>Build up to and run at least one 20-miler before a marathon. “Long runs simulate the marathon, which requires lots of time on your feet,” says running coach Gina Simmering-Lanterman. “And knowing that you can run 20 miles helps you wrap your head around running 26.2.”</item> <!-- Tips N°10 -->
+        <item>For a few days before a long race, emphasize carbohydrates in your diet. “Carbo-loading” became the marathoner’s mantra after Scandinavian studies in 1967 suggested cramming down carbs following a period of carb depletion produced super-charged athletes. Experts now say simply emphasizing carbs a few days before a race over two hours works just as well. You’ll want to refuel regularly on the run before your muscles become fully depleted. Try to consume 30 to 60 grams every hour, depending on your intensity and also body size.</item> <!-- Tips N°11 -->
+        <item>Runners improve for about seven years. Mike Tymn noticed this in the early 1980s and wrote about it in his National Masters News column. “My seven-year adaptation theory was based on the fact that so many runners I talked to ran their best times an average of seven years after they started,” he recalls.</item> <!-- Tips N°12 -->
+        <item>To keep safe, run facing traffic. “While running, it’s better to watch the traffic than to have it come up from behind you,” says Adam Cuevas, a marathoner and chief of the Enforcement Services Division of the California Highway Patrol. It’s the law in California and many other states to run on the left side unless you’re on the sidewalk.</item> <!-- Tips N°13 -->
+        <item>Running uphill slows you down more than running downhill speeds you up. So, you can expect hilly runs to be slower than flat runs. “You don’t get all of the energy that you expend going uphill back when you run downhill,” explains Nimbus Couzin, Ph.D., a marathon-running physics instructor. “That’s because when your feet strike the ground on a descent, a lot of energy is lost.”</item> <!-- Tips N°14 -->
+        <item>Sleep one extra minute per night for each mile per week that you train. So if you run 30 miles a week, sleep an extra half hour each night. “Sleep deprivation has a negative impact on training,” says David Claman, M.D., director of the University of California-San Francisco Sleep Disorders Center. “The average person needs seven and a half to eight hours of sleep, so increase that amount when you’re training.”</item> <!-- Tips N°15 -->
+        <item>Consume a combination carbohydrate-protein food or beverage within 30 to 60 minutes after any race, speed workout, or long run. “You need an infusion of carbs to replace depleted muscle glycogen, plus some protein to repair and build muscle,” says Nancy Clark, R.D., author of Food Guide for Marathoners. “Some examples would be 150 to 300 calories of low-fat chocolate milk, a recovery-sports drink, flavored yogurt, or a bagel and peanut butter.” After long or hard runs, you should increase your protein intake.</item> <!-- Tips N°16 -->
+        <item>Runners who only run are prone to injury. “Cross-training and weight training will make you a stronger and healthier runner,” says FinalK.com coach Kris Swarthout. “Low- and nonimpact sports like biking and swimming will help build supporting muscles used in running, while also giving your primary running muscles a rest.”</item> <!-- Tips N°17 -->
+        <item>The best way to race to a personal best is to maintain an even pace from start to finish. Most of the 10,000-meter and marathon world records set in the last decade have featured almost metronome-like pacing. “If you run too fast early in the race, you almost always pay for it later,” warns Jon Sinclair, the former U.S. 12K record holder and now an online coach.</item> <!-- Tips N°18 -->
+        <item>Replace running shoes once they’ve covered 400 to 500 miles. “But even before they have that much wear,” says Warren Greene, former Runner’s World shoe guru, “buy a new pair and rotate them for a while. Don’t wait until your only pair is trashed.” Consider shoes trashed when the spring is gone.</item> <!-- Tips N°19 -->
+        <item>Take at least one easy day after every hard day of training. “Easy” means a short, slow run, a cross-training day, or no exercise at all. “Hard” means a long run, tempo run, or speed workout. “Give your body the rest it needs to be effective for the next hard run,” says Todd Williams, a two-time U.S. Olympian. Apply the hard/easy rule to your monthly and yearly training cycles by treating yourself to one easy week each month, and one easy month each year.</item> <!-- Tips N°20 -->
     </string-array>
 
 

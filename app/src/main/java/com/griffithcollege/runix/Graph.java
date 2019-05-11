@@ -6,11 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Toast;
+
+import java.util.LinkedList;
 
 public class Graph extends View
 {
-    int max_time = 3600; //example (1h)
+    float max_time = 40; //example (to delete)
 
     public Graph(Context context)
     {
@@ -48,33 +49,81 @@ public class Graph extends View
 
         canvas.drawLine(0,0,0, 500, paint); //Y axis
         canvas.drawLine(0,0, getWidth(),0, paint); //X axis
-        draw_xPoint(canvas, max_time);
+
+
+        draw_xPoint(canvas);
         draw_yPoint(canvas);
-        setPoint(canvas, 100, 10);
+
+        //--- TEST ---//
+        //TEST_TEST_TEST(canvas);
+        // <=>
+        LinkedList<Integer> times = new LinkedList<>();
+        LinkedList<Integer> speeds = new LinkedList<>();
+        times.add(0); times.add(10); times.add(20); times.add(30); times.add(40);
+        speeds.add(0); speeds.add(5); speeds.add(7); speeds.add(3); speeds.add(10);
+        addLink(canvas, times, speeds);
+    }
+
+    public void TEST_TEST_TEST(Canvas canvas) // TO DELETE AFTER
+    {
+        max_time = 40; // temps total = 40s
+
+        setPoint(canvas, 0, 0); // A
+
+        setPoint(canvas, 10, 5); //B
+        setLinkAB(canvas, 0, 0, 10, 5);
+
+        setPoint(canvas, 20, 7);
+        setLinkAB(canvas, 10, 5, 20, 7);
+
+        setPoint(canvas, 30, 3);
+        setLinkAB(canvas, 20, 7, 30, 3);
+
+        setPoint(canvas, 40, 10);
+        setLinkAB(canvas, 30, 3, 40, 10);
+    }
+
+    public void addLink(Canvas canvas, LinkedList<Integer> Times, LinkedList<Integer> Speeds)
+    {
+        // Times and Speeds must be the same size !
+        setPoint(canvas, Times.get(0), Speeds.get(0)); // Draw the first point
+
+        int size = Times.size();
+        setPoint(canvas, Times.get(0), Speeds.get(0));
+        for (int p = 1; p < size; p++)
+        {
+            setPoint(canvas, Times.get(p), Speeds.get(p));
+            setLinkAB(canvas, Times.get(p - 1), Speeds.get(p - 1), Times.get(p), Speeds.get(p));
+        }
+    }
+
+    public void setLinkAB(Canvas canvas, int timeA, int speedA, int timeB, int speedB)
+    {
+        float coeff = getWidth() / max_time;
+        canvas.drawLine(timeA*coeff, speedA*50, timeB*coeff, speedB*50, paint);
     }
 
     public void setPoint(Canvas canvas, int time, int speed)
     {
-        int position_x = time;
-        int position_y = speed*50; //scaling for the y axis
+        float coeff = getWidth() / max_time;
+        float position_x = time*coeff;
+        float position_y = speed*50; //scaling for the y axis
         canvas.drawPoint(position_x, position_y, paint);
     }
 
-    public void draw_xPoint(Canvas canvas, int maxtime)
+    public void draw_xPoint(Canvas canvas)
     {
-        int coeff = maxtime / getWidth();
-        int time_scale = (coeff * getWidth()) / 10;
-
-        int i = 0;
-        while (i < maxtime)
+        float intervalle = getWidth() / 5;
+        float x = 0;
+        while (x < getWidth())
         {
             String timestr = "|";
-            if (i == 0)
+            if (x == 0)
                 timestr = "0";
-            canvas.drawText(timestr, 0, timestr.length(), i,0, paint);
-            i += time_scale;
+            canvas.drawText(timestr, 0, timestr.length(), x,0, paint);
+            x += intervalle;
         }
-        Toast.makeText(getContext(), "Width : "+getWidth() + "\n Time scale : "+time_scale, Toast.LENGTH_SHORT).show();
+
     }
 
     public void draw_yPoint(Canvas canvas)

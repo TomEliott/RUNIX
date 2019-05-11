@@ -16,10 +16,6 @@
             android:id="@+id/nav_tips"
             android:icon="@android:drawable/ic_popup_reminder"
             android:title="Tips" />
-        <item
-            android:id="@+id/nav_maps"
-            android:icon="@android:drawable/ic_dialog_map"
-            android:title="Maps" />
     </group>
 
     <item android:title="Others">

@@ -1,7 +1,6 @@
 package com.griffithcollege.runix;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,16 +8,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class StatsActivity extends MainActivity
 {
@@ -30,7 +26,7 @@ public class StatsActivity extends MainActivity
         ToolbarStat(); // Generation of Stats' Toolbar
 
         //Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.share);
+        FloatingActionButton fab = findViewById(R.id.share); // TO FIX
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +38,8 @@ public class StatsActivity extends MainActivity
         // Set up TextView & Data
         AverageSpeed();
         TotalDistance();
+        TimeTaken();
+        Altitude();
     }
 
     public void ToolbarStat()
@@ -66,14 +64,9 @@ public class StatsActivity extends MainActivity
 
     public void AverageSpeed()
     {
-        // Recuperation of speed values
-        // TO DO
-
-        // Calculation of average speed
-        // TO DO
-
-        // Change TextView
-        String averagespeed_str = "Average Speed : 12 km/h";
+        String averagespeed = ""; // TO FIX
+        //----//
+        String averagespeed_str = "Average Speed : "+averagespeed;
         SpannableString averagespeed_str_4textview =  new SpannableString(averagespeed_str);
         averagespeed_str_4textview.setSpan(new RelativeSizeSpan(1.5f), 15, averagespeed_str.length(), 0); // Set the size
         //averagespeed_str_4textview.setSpan(new ForegroundColorSpan(Color.RED), 15, averagespeed_str.length(), 0); // Set the color
@@ -83,18 +76,32 @@ public class StatsActivity extends MainActivity
 
     public void TotalDistance()
     {
-        // Recuperation of distance
-        // TO DO
-
-        // Calculation of total distance
-        // TO DO
-
-        // Change TextView
-        String totaldistance_str = "Total Distance\n 42 km";
+        String totaldistance = ""; // TO FIX
+        //----//
+        String totaldistance_str = "Total Distance\n "+totaldistance;
         SpannableString totaldistance_str_4textview =  new SpannableString(totaldistance_str);
         totaldistance_str_4textview.setSpan(new RelativeSizeSpan(2.1f), 16, totaldistance_str.length(), 0);
         TextView textView_TotalDistance = findViewById(R.id.TotalDistance);
         textView_TotalDistance.setText(totaldistance_str_4textview);
+    }
+
+    public void TimeTaken()
+    {
+        String timetaken = ""; // TO FIX
+        //----//
+        TextView textView_TimeTaken = findViewById(R.id.TimeTaken);
+        TextView time_x = findViewById(R.id.time_x);
+        textView_TimeTaken.setText("Time taken\n"+timetaken);
+        time_x.setText(timetaken);
+    }
+
+    public void Altitude()
+    {
+        String alti_max = ""; // TO FIX
+        String alti_min = ""; // TO FIX
+        //----//
+        TextView altitude = findViewById(R.id.Altitude);
+        altitude.setText("Altitude max :"+alti_max+"\nAltitude min :"+alti_min);
     }
 
     // MENU AREA
@@ -145,6 +152,7 @@ public class StatsActivity extends MainActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
     {
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home) // HOME
         {
@@ -155,25 +163,23 @@ public class StatsActivity extends MainActivity
         }
         else if (id == R.id.nav_stats) // STATS
         {
-            // From StatsActivity to StatsActivity
+            // From MainActivity to StatsActivity
+            // Nothing to do
         }
-        else if (id == R.id.nav_tips) // TIPS (feature)
+        else if (id == R.id.nav_tips) // TIPS
         {
-            // From StatsActivity to TipsActivity
-            // TO DO
-        }
-        else if (id == R.id.nav_maps) // MAPS (feature)
-        {
-            // From StatsActivity to MapsActivity
-            // TO DO
+            // From MainActivity to TipsActivity
+            Intent intent = new Intent(getBaseContext(), TipsActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_settings) // SETTINGS
         {
-            ChangeUsername("Settings", "Personalize RUNIX's experience by indicating your name.");
+            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
+                    "indicating your name.");
         }
         else if (id == R.id.nav_about) // ABOUT
         {
-            // From StatsActivity to AboutActivity
+            // From MainActivity to AboutActivity
             Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             startActivity(intent);
         }

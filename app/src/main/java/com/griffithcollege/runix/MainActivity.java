@@ -221,11 +221,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) // HOME
         {
             // From MainActivity to MainActivity
+            // Nothing to do
         }
         else if (id == R.id.nav_stats) // STATS
         {
             // From MainActivity to StatsActivity
-
             if (isReady)
             {
                 Intent intent = new Intent(getBaseContext(), StatsActivity.class);
@@ -239,16 +239,11 @@ public class MainActivity extends AppCompatActivity
                         "statistics.", Toast.LENGTH_SHORT).show();
             }
         }
-        else if (id == R.id.nav_tips) // TIPS (feature)
+        else if (id == R.id.nav_tips) // TIPS
         {
             // From MainActivity to TipsActivity
             Intent intent = new Intent(getBaseContext(), TipsActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.nav_maps) // MAPS (feature)
-        {
-            // From MainActivity to MapsActivity
-            // TO DO
         }
         else if (id == R.id.nav_settings) // SETTINGS
         {

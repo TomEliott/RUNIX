@@ -1,13 +1,15 @@
 package com.griffithcollege.runix;
 
-public class Statistics {
+public class Statistics
+{
     DataGPS data;
 
     public Statistics(DataGPS dataGPS){
         this.data = dataGPS;
     }
 
-  public Float averageSpeed(){
+  public Float averageSpeed()
+  {
         Float sumSpeed = 0f;
         for(int i = 0; i< data.size(); i++){
             sumSpeed += data.get(i).getmSpeed();
@@ -15,7 +17,8 @@ public class Statistics {
         return (sumSpeed/data.size());
   }
 
-    public Long timeTaken(){
+    public Long timeTaken()
+    {
         return (data.get(data.size()-1).getmTime().getTime() - data.get(0).getmTime().getTime());
     }
 
@@ -69,5 +72,4 @@ public class Statistics {
         }
         return min;
     }
-
 }

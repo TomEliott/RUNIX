@@ -16,12 +16,8 @@ public class AboutActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        // Buttons declaration
         final FloatingActionButton returnhome = findViewById(R.id.about_returnhome);
-        //final FloatingActionButton github = findViewById(R.id.github);
-        //final FloatingActionButton website = findViewById(R.id.website);
 
-        // Button that will return to MainActivity
         returnhome.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -31,29 +27,5 @@ public class AboutActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-
-        // Button that will open my profile on the GitHub website (for credits)
-        /*github.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                String GitHubWebsite = "https://www.github.com/TomEliott"; // My GitHub profile
-                Intent git = new Intent(Intent.ACTION_VIEW);
-                git.setData(Uri.parse(GitHubWebsite));
-                startActivity(git);
-            }
-        });*/
-
-        // Button that will open my personal website (for credits)
-        /*website.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                String TomEliottWebsite = "https://www.tomeliott.com"; // My website
-                Intent website = new Intent(Intent.ACTION_VIEW);
-                website.setData(Uri.parse(TomEliottWebsite));
-                startActivity(website);
-            }
-        });*/
     }
 }
