@@ -10,12 +10,16 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_stats"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@android:drawable/ic_input_get"
             android:title="Stats" />
         <item
             android:id="@+id/nav_tips"
             android:icon="@android:drawable/ic_popup_reminder"
             android:title="Tips" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share" />
     </group>
 
     <item android:title="Others">

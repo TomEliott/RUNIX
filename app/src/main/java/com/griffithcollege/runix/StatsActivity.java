@@ -15,9 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StatsActivity extends MainActivity
 {
+    final String distance = "";
+    final String time = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,13 +29,12 @@ public class StatsActivity extends MainActivity
         setContentView(R.layout.activity_stats);
         ToolbarStat(); // Generation of Stats' Toolbar
 
-        //Floating Action Button
-        FloatingActionButton fab = findViewById(R.id.share); // TO FIX
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton share_button = findViewById(R.id.share);
+        share_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view)
+            {
+                share(distance, time);
             }
         });
 
@@ -104,6 +107,15 @@ public class StatsActivity extends MainActivity
         altitude.setText("Altitude max :"+alti_max+"\nAltitude min :"+alti_min);
     }
 
+    public void share(String distance, String time)
+    {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Yeah! With Runix, I measured that I had run for "+time+" on more than "+distance+"km.");
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
     // MENU AREA
     @Override
     public void onBackPressed()
@@ -135,8 +147,9 @@ public class StatsActivity extends MainActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.SettingsMenu)
         {
-            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
-                    "indicating your name.");
+            Toast.makeText(getApplicationContext(), "Please complete a new " +
+                    "running activity before changing your " +
+                    "username.", Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.AboutMenu)
@@ -164,7 +177,9 @@ public class StatsActivity extends MainActivity
         else if (id == R.id.nav_stats) // STATS
         {
             // From MainActivity to StatsActivity
-            // Nothing to do
+            Toast.makeText(getApplicationContext(), "You are already " +
+                    "in the statistics dashboard", Toast.LENGTH_SHORT).show();
+            return true;
         }
         else if (id == R.id.nav_tips) // TIPS
         {
@@ -172,17 +187,25 @@ public class StatsActivity extends MainActivity
             Intent intent = new Intent(getBaseContext(), TipsActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_share) // SHARE
+        {
+            share(distance, time);
+            return true;
+        }
         else if (id == R.id.nav_settings) // SETTINGS
         {
-            ChangeUsername("Settings", "Personalize RUNIX's experience by " +
-                    "indicating your name.");
+            Toast.makeText(getApplicationContext(), "Please complete a new " +
+                    "running activity before changing your " +
+                    "username.", Toast.LENGTH_SHORT).show();
+            return true;
         }
-        else if (id == R.id.nav_about) // ABOUT
+        else //if (id == R.id.nav_about) // ABOUT
         {
             // From MainActivity to AboutActivity
             Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             startActivity(intent);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
