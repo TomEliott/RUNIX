@@ -54,14 +54,17 @@
         <com.griffithcollege.runix.Graph
             android:id="@+id/GraphCustomView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:background="#ccc"
-            android:paddingLeft="20dp"
-            android:paddingBottom="40dp"
-            app:exampleColor="#33b5e5"
-            app:exampleDimension="24sp"
-            app:exampleDrawable="@android:drawable/stat_notify_sync"
-            app:exampleString="Votai Test." />
+            android:layout_height="242dp" />
+
+        <TextView
+            android:id="@+id/time_x"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="time"
+            android:textAlignment="textEnd"
+            android:textColor="@android:color/black"
+            android:textSize="9dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/AverageSpeed"
