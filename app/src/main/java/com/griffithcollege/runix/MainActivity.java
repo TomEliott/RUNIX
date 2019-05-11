@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity
             if (isReady)
             {
                 Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                intent.putExtra("filename", filename);
                 finish();
                 startActivity(intent);
             }

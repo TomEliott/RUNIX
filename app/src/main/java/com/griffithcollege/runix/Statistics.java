@@ -19,7 +19,7 @@ public class Statistics
 
     public Long timeTaken()
     {
-        return (data.get(data.size()-1).getmTime().getTime() - data.get(0).getmTime().getTime());
+        return ((data.get(data.size()-1).getmTime().getTime() - data.get(0).getmTime().getTime())/1000);
     }
 
     public Double distanceBetweenPoints(int index){

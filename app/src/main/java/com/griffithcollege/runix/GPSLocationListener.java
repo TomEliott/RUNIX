@@ -23,7 +23,7 @@ public class GPSLocationListener implements  LocationListener {
     public void onLocationChanged(Location location) {
         Date date = new Date(location.getTime());
 
-        data.add(location.getLatitude(),location.getLongitude(),location.getAltitude(), location.getSpeed(), date);
+        data.add(location.getLatitude(),location.getLongitude(),location.getAltitude(), (location.getSpeed()*3.6f), date);
     }
 
     @Override

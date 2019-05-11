@@ -17,14 +17,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class StatsActivity extends MainActivity
 {
     final String distance = "";
     final String time = "";
+    String filename;
+    GPXParser parser;
+    DataGPS data;
+    Statistics stats;
+    DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+        df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
         ToolbarStat(); // Generation of Stats' Toolbar
@@ -37,6 +48,13 @@ public class StatsActivity extends MainActivity
                 share(distance, time);
             }
         });
+
+        Intent intent = getIntent();
+        filename = intent.getStringExtra("filename");
+
+        parser = new GPXParser();
+        data = parser.readGPX(filename);
+        stats = new Statistics(data);
 
         // Set up TextView & Data
         AverageSpeed();
@@ -67,9 +85,9 @@ public class StatsActivity extends MainActivity
 
     public void AverageSpeed()
     {
-        String averagespeed = ""; // TO FIX
+        String averagespeed = df.format(stats.averageSpeed()); // TO FIX
         //----//
-        String averagespeed_str = "Average Speed : "+averagespeed;
+        String averagespeed_str = "Average Speed : "+averagespeed+" Km/h";
         SpannableString averagespeed_str_4textview =  new SpannableString(averagespeed_str);
         averagespeed_str_4textview.setSpan(new RelativeSizeSpan(1.5f), 15, averagespeed_str.length(), 0); // Set the size
         //averagespeed_str_4textview.setSpan(new ForegroundColorSpan(Color.RED), 15, averagespeed_str.length(), 0); // Set the color
@@ -79,9 +97,9 @@ public class StatsActivity extends MainActivity
 
     public void TotalDistance()
     {
-        String totaldistance = ""; // TO FIX
+        String totaldistance = String.valueOf(stats.totalDistance().intValue()); // TO FIX
         //----//
-        String totaldistance_str = "Total Distance\n "+totaldistance;
+        String totaldistance_str = "Total Distance\n "+totaldistance+" m";
         SpannableString totaldistance_str_4textview =  new SpannableString(totaldistance_str);
         totaldistance_str_4textview.setSpan(new RelativeSizeSpan(2.1f), 16, totaldistance_str.length(), 0);
         TextView textView_TotalDistance = findViewById(R.id.TotalDistance);
@@ -90,21 +108,21 @@ public class StatsActivity extends MainActivity
 
     public void TimeTaken()
     {
-        String timetaken = ""; // TO FIX
+        String timetaken = stats.timeTaken().toString(); // TO FIX
         //----//
         TextView textView_TimeTaken = findViewById(R.id.TimeTaken);
         TextView time_x = findViewById(R.id.time_x);
-        textView_TimeTaken.setText("Time taken\n"+timetaken);
+        textView_TimeTaken.setText("Time taken\n"+timetaken+" s");
         time_x.setText(timetaken);
     }
 
     public void Altitude()
     {
-        String alti_max = ""; // TO FIX
-        String alti_min = ""; // TO FIX
+        String alti_max = df.format(stats.maximumAltitude()); // TO FIX
+        String alti_min = df.format(stats.minimumAltitude()); // TO FIX
         //----//
         TextView altitude = findViewById(R.id.Altitude);
-        altitude.setText("Altitude max :"+alti_max+"\nAltitude min :"+alti_min);
+        altitude.setText("Altitude max :"+alti_max+" m"+"\nAltitude min :"+alti_min+" m");
     }
 
     public void share(String distance, String time)
