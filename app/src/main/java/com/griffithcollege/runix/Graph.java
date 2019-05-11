@@ -1,194 +1,117 @@
 package com.griffithcollege.runix;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Toast;
 
 public class Graph extends View
 {
-    private String mExampleString; // TODO: use a default from R.string...
-    private int mExampleColor = Color.RED; // TODO: use a default from R.color...
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
-    private Drawable mExampleDrawable;
-
-    private TextPaint mTextPaint;
-    private float mTextWidth;
-    private float mTextHeight;
+    int max_time = 60; //example (1 min)
 
     public Graph(Context context)
     {
         super(context);
-        init(null, 0);
+        init();
     }
 
     public Graph(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        init(attrs, 0);
+        init();
     }
-
     public Graph(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init();
     }
 
-    private void init(AttributeSet attrs, int defStyle)
+    private Paint paint = new Paint();
+
+    private void init()
     {
-        // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(
-                attrs, R.styleable.Graph, defStyle, 0);
-
-        mExampleString = a.getString(
-                R.styleable.Graph_exampleString);
-        mExampleColor = a.getColor(
-                R.styleable.Graph_exampleColor,
-                mExampleColor);
-        // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
-        // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
-                R.styleable.Graph_exampleDimension,
-                mExampleDimension);
-
-        if (a.hasValue(R.styleable.Graph_exampleDrawable))
-        {
-            mExampleDrawable = a.getDrawable(
-                    R.styleable.Graph_exampleDrawable);
-            mExampleDrawable.setCallback(this);
-        }
-
-        a.recycle();
-
-        // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
-
-        // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
-    }
-
-    private void invalidateTextPaintAndMeasurements()
-    {
-        mTextPaint.setTextSize(mExampleDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
-
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(4f);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize(34);
     }
 
     @Override
     protected void onDraw(Canvas canvas)
     {
+        paint.setStrokeWidth(3f);
+        canvas.scale(1, -1, getWidth() / 2, 600 / 2);
+
+        canvas.drawLine(0,0,0, 500, paint); //Y axis
+        canvas.drawLine(0,0, getWidth(),0, paint); //X axis
+        draw_xPoint(canvas, max_time);
+        draw_yPoint(canvas);
+
+        //canvas.drawPoint(500, getWidth(), paint);
+
+
         super.onDraw(canvas);
+        //canvas.drawRect(600, 600, 0, 0, paint);
 
-        // TODO: consider storing these as member variables to reduce
-        // allocations per draw cycle.
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
+        int startX = 0;
+        int startY = 0;
+        int stopX = 100;
+        int stopY = 100;
 
-        int contentWidth = getWidth() - paddingLeft - paddingRight;
-        int contentHeight = getHeight() - paddingTop - paddingBottom;
+        //canvas.drawLine(startX, startY, stopX, stopY, paint);
+        //canvas.drawLine(0,0,600,600, paint);
 
-        // Draw the text.
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
+        //xAxis(canvas); // Axe des x
+        //yAxis(canvas); // Axe des y
 
-        // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop,
-                    paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
+        setPoint(canvas, 100, 10);
+    }
+
+    public void setPoint(Canvas canvas, int time, int speed)
+    {
+        int position_x = time;
+        int position_y = speed*50; //scaling for the y axis
+        canvas.drawPoint(position_x, position_y, paint);
+    }
+
+    public void draw_xPoint(Canvas canvas, int maxtime)
+    {
+        int coeff = maxtime / getWidth();
+        int time_scale = (coeff * getWidth()) / 10;
+
+        int i = 0;
+        while (i < maxtime)
+        {
+            String timestr = "|";
+            if (i == 0)
+                timestr = "0";
+            canvas.drawText(timestr, 0, timestr.length(), i,0, paint);
+            i += time_scale;
         }
+        Toast.makeText(getContext(), "Width : "+getWidth() + "\n Time scale : "+time_scale, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
-    }
-
-    /**
-     * Sets the view's example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example color attribute value.
-     *
-     * @return The example color attribute value.
-     */
-    public int getExampleColor() {
-        return mExampleColor;
-    }
-
-    /**
-     * Sets the view's example color attribute value. In the example view, this color
-     * is the font color.
-     *
-     * @param exampleColor The example color attribute value to use.
-     */
-    public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example dimension attribute value.
-     *
-     * @return The example dimension attribute value.
-     */
-    public float getExampleDimension() {
-        return mExampleDimension;
-    }
-
-    /**
-     * Sets the view's example dimension attribute value. In the example view, this dimension
-     * is the font size.
-     *
-     * @param exampleDimension The example dimension attribute value to use.
-     */
-    public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example drawable attribute value.
-     *
-     * @return The example drawable attribute value.
-     */
-    public Drawable getExampleDrawable() {
-        return mExampleDrawable;
-    }
-
-    /**
-     * Sets the view's example drawable attribute value. In the example view, this drawable is
-     * drawn above the text.
-     *
-     * @param exampleDrawable The example drawable attribute value to use.
-     */
-    public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
+    public void draw_yPoint(Canvas canvas)
+    {
+        canvas.drawText("_", 0, 50, paint);
+        canvas.drawText("_", 0, 100, paint);
+        canvas.drawText("_", 0, 150, paint);
+        canvas.drawText("_", 0, 200, paint);
+        canvas.drawText("_", 0, 250, paint);
+        canvas.drawText("_", 0, 300, paint);
+        canvas.drawText("_", 0, 350, paint);
+        canvas.drawText("_", 0, 400, paint);
+        canvas.drawText("_", 0, 450, paint);
+        canvas.drawText("_ I0", 0, 500, paint);
     }
 }
