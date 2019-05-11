@@ -221,7 +221,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) // HOME
         {
             // From MainActivity to MainActivity
-            // Nothing to do
+            // From MainActivity to StatsActivity
+            Toast.makeText(getApplicationContext(), "You are already " +
+                    "in the home dashboard", Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.nav_stats) // STATS
         {
@@ -239,6 +241,12 @@ public class MainActivity extends AppCompatActivity
                         "statistics.", Toast.LENGTH_SHORT).show();
             }
         }
+        else if (id == R.id.nav_share)
+        {
+            Toast.makeText(getApplicationContext(), "Please complete the current " +
+                    "running activity before sharing your " +
+                    "data.", Toast.LENGTH_SHORT).show();
+        }
         else if (id == R.id.nav_tips) // TIPS
         {
             // From MainActivity to TipsActivity
@@ -250,28 +258,34 @@ public class MainActivity extends AppCompatActivity
             ChangeUsername("Settings", "Personalize RUNIX's experience by " +
                     "indicating your name.");
         }
-        else if (id == R.id.nav_about) // ABOUT
+        else //if (id == R.id.nav_about) // ABOUT
         {
             // From MainActivity to AboutActivity
             Intent intent = new Intent(getBaseContext(), AboutActivity.class);
             startActivity(intent);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
 
-    public void gpsStart() {
+    public void gpsStart()
+    {
         gps = new GPSLocationListener();
-        try {
+        try
+        {
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
-        } catch (SecurityException se) {
+        }
+        catch (SecurityException se)
+        {
             se.printStackTrace();
         }
     }
 
-    public void gpsStop(){
+    public void gpsStop()
+    {
         lm.removeUpdates(gps);
         parser.writeGPX(gps.getData(),filename);
         gps = null;
