@@ -1,23 +1,16 @@
 package com.griffithcollege.runix;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Toast;
 
 public class Graph extends View
 {
-    int max_time = 60; //example (1 min)
+    int max_time = 3600; //example (1h)
 
     public Graph(Context context)
     {
@@ -49,6 +42,7 @@ public class Graph extends View
     @Override
     protected void onDraw(Canvas canvas)
     {
+        super.onDraw(canvas);
         paint.setStrokeWidth(3f);
         canvas.scale(1, -1, getWidth() / 2, 600 / 2);
 
@@ -56,24 +50,6 @@ public class Graph extends View
         canvas.drawLine(0,0, getWidth(),0, paint); //X axis
         draw_xPoint(canvas, max_time);
         draw_yPoint(canvas);
-
-        //canvas.drawPoint(500, getWidth(), paint);
-
-
-        super.onDraw(canvas);
-        //canvas.drawRect(600, 600, 0, 0, paint);
-
-        int startX = 0;
-        int startY = 0;
-        int stopX = 100;
-        int stopY = 100;
-
-        //canvas.drawLine(startX, startY, stopX, stopY, paint);
-        //canvas.drawLine(0,0,600,600, paint);
-
-        //xAxis(canvas); // Axe des x
-        //yAxis(canvas); // Axe des y
-
         setPoint(canvas, 100, 10);
     }
 
