@@ -8,10 +8,20 @@ public class Statistics
 {
     DataGPS data;
 
+    /**
+     *
+     * @param dataGPS the dataGPS full of DataPoint that will allow use to calculate all of the
+     *                different statistic you need to stay fresh and healthy
+     */
     public Statistics(DataGPS dataGPS){
         this.data = dataGPS;
     }
 
+    /**
+     * Calculated by computing the sum of all the speeds and then divided by the ni=umber of points
+     *
+     * @return the average speed
+     */
   public Float averageSpeed()
   {
         Float sumSpeed = 0f;
@@ -21,11 +31,23 @@ public class Statistics
         return (sumSpeed/data.size());
   }
 
+    /**
+     *  Just call timeBetweenCurrentAndFirstPoints(indexOfLastPoint)
+     *
+     * @return the total time
+     */
     public Float timeTaken()
     {
         return (timeBetweenCurrentAndFirstPoints(data.size()-1));
     }
 
+    /**
+     * The distance is found by using the 'haversine' formula, using the altitude, longitude
+     * and altitude of two points.
+     *
+     * @param index the index of the first point
+     * @return the distance between the first point and the next
+     */
     public Double distanceBetweenPoints(int index){
         DataGPS.DataPoint point1 = data.get(index);
         DataGPS.DataPoint point2 = data.get(index+1);

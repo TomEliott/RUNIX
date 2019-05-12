@@ -13,15 +13,30 @@ public class GPSLocationListener implements  LocationListener {
     private DataGPS data;
     private LocationManager lm;
 
-    public GPSLocationListener(LocationManager lm){
+    /**
+     * The constructor of the GPSLocationListener create a new DataGPS, and take in argument
+     * the LocationManager used in MainActivity for the onProviderEnabled() methods
+     */
+    public GPSLocationListener(){
         this.data = new DataGPS();
-        this.lm =lm;
     }
 
+    /**
+     *  This method return the DataGPS, it is only called before the GPSLocationListener is
+     *  destroyed
+     *
+     * @return DataGPS
+     */
     public DataGPS getData() {
         return data;
     }
 
+    /**
+     * This method that is called when the location changed just use the different information
+     * on the location to create a new DataPoint that will be added to the DataGPS
+     *
+     * @param location
+     */
     @Override
     public void onLocationChanged(Location location) {
         Date date = new Date(location.getTime());
@@ -36,17 +51,7 @@ public class GPSLocationListener implements  LocationListener {
 
     @Override
     public void onProviderEnabled(String provider) {
-        if(provider == LocationManager.GPS_PROVIDER){
-            try{
-                Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if(location != null){
-                    Date date = new Date(location.getTime());
-                    data.add(location.getLatitude(),location.getLongitude(),location.getAltitude(), (location.getSpeed()*3.6f), date);
-                }
-            }catch (SecurityException e){
-                e.printStackTrace();
-            }
-        }
+
     }
 
     @Override

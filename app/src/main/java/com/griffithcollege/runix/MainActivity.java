@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity
 
     public void gpsStart()
     {
-        gps = new GPSLocationListener(lm);
+        gps = new GPSLocationListener();
         try
         {
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
