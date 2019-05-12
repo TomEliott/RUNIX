@@ -75,6 +75,11 @@ public class Statistics
         return Math.sqrt(distance);
     }
 
+    /**
+     * do the sum of each distance of two point one after another in order
+     *
+     * @return the total distance
+     */
     public Double totalDistance(){
         Double sumDistance = 0d;
         for(int i = 0; i< data.size()-1; i++){
@@ -83,6 +88,10 @@ public class Statistics
         return sumDistance;
     }
 
+    /**
+     *  just found the max altitude
+     * @return return the max altitude
+     */
     public Double maximumAltitude(){
         Double max = data.get(0).getmAltitude();
         for(int i = 1; i<data.size();i++){
@@ -91,6 +100,10 @@ public class Statistics
         return max;
     }
 
+    /**
+     *  just found the min altitude
+     * @return return the min altitude
+     */
     public Double minimumAltitude() {
         Double min = data.get(0).getmAltitude();
         for (int i = 1; i < data.size(); i++) {
@@ -99,6 +112,10 @@ public class Statistics
         return min;
     }
 
+    /**for each point we compute the amount of time it pass since the recording
+     *
+     * @return linked linked list of all the times for each point for the Graph
+     */
     public LinkedList<Float> timePoint(){
         LinkedList<Float> timePoint = new LinkedList<>();
         timePoint.add(0f);
@@ -108,6 +125,11 @@ public class Statistics
         return timePoint;
     }
 
+    /** we subtract the current time with the time of the first point
+     *
+     * @param index index of the point were we need the time
+     * @return amount on time since recording
+     */
     public Float timeBetweenCurrentAndFirstPoints (int index){
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
@@ -117,6 +139,11 @@ public class Statistics
         return(Float.valueOf(df.format(result)));
     }
 
+    /**
+     *  we just use a get and round all number to the 2nd degree
+     *
+     * @return a linkedList of the speed of each point for the graph
+     */
     public LinkedList<Float> speedPoint(){
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);

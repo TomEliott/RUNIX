@@ -113,17 +113,10 @@ public class MainActivity extends AppCompatActivity
                 }
                 else // <=> if (step == 3) <=> STATS
                 {
-                    if(true)
-                    {
-                        Intent intent = new Intent(getBaseContext(), StatsActivity.class);
-                        intent.putExtra("filename", filename);
-                        finish();
-                        startActivity(intent);
-                    } else {
-                        alertNoData("ALERT","You haven't moved, please move");
-                        step = 0;
-                        start.setImageResource(R.drawable.ic_restart);
-                    }
+                    Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                    intent.putExtra("filename", filename);
+                    finish();
+                    startActivity(intent);
                 }
             }
         });
@@ -241,17 +234,10 @@ public class MainActivity extends AppCompatActivity
             // From MainActivity to StatsActivity
             if (isReady)
             {
-                if(statsIsPossible)
-                {
-                    Intent intent = new Intent(getBaseContext(), StatsActivity.class);
-                    intent.putExtra("filename", filename);
-                    finish();
-                    startActivity(intent);
-                }
-                else {
-                    alertNoData("ALERT","You haven't moved, please move");
-                    step = 0;
-                }
+                Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                intent.putExtra("filename", filename);
+                finish();
+                startActivity(intent);
             }
             else
             {
@@ -309,14 +295,6 @@ public class MainActivity extends AppCompatActivity
         {
             lm.removeUpdates(gps);
             parser.writeGPX(gps.getData(),filename);
-           /* if (gps.getData().size() < 2)
-                {
-                    statsIsPossible = false;
-                }
-            else
-                {
-                    statsIsPossible = true;
-                }*/
             gps = null;
         }
         catch (SecurityException se)

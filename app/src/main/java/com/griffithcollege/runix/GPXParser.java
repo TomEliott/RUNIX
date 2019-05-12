@@ -17,6 +17,11 @@ import java.util.Date;
 
 public class GPXParser {
 
+    /** Either create a new file if it doesnt exist or load it if it does, depend if we read or write a gpx file
+     *
+     * @param filename of the gpx we want to save/load
+     * @return the file
+     */
     public File getGPXFile(String filename){
         try{
             File GPX = new File(Environment.getExternalStorageDirectory() + "/" + "GPStracks", filename);
@@ -30,6 +35,12 @@ public class GPXParser {
         }
     }
 
+    /**we read the gpx file by going to each trackpoint and getting the different values and then put
+     * them in a DataPoint that is then added to the DataGPS
+     *
+     * @param filename of the gpx file to be read
+     * @return the DataGPS extracted from the gpx file
+     */
     public DataGPS readGPX(String filename){
         try {
             DataGPS data = new DataGPS();
@@ -70,6 +81,11 @@ public class GPXParser {
         return null;
     }
 
+    /** write the gpx file using a serializer called XmlSerializer
+     *
+     * @param data the DataGPS which data needs to be written in a gpx file
+     * @param filename of the gpx we want to write in, will be created if it does'nt exist
+     */
     public void writeGPX(DataGPS data, String filename){
         XmlSerializer gpxSerializer = Xml.newSerializer();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

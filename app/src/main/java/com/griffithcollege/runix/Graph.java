@@ -51,46 +51,10 @@ public class Graph extends View
         draw_xPoint(canvas);
         draw_yPoint(canvas);
 
-        // TESTS
-        //StatsActivity stats = new StatsActivity();
-        //LinkedList<Integer> times = stats.getTimes();
-        //LinkedList<Integer> speeds = stats.getSpeeds();
-        //float max_time = stats.getMaxTime();
-        //addLink(canvas, times, speeds, max_time);
-
-        //--- TEST ---//
-        //TEST_TEST_TEST(canvas);
-        // <=>
-        /*
-        LinkedList<Integer> times = new LinkedList<>();
-        LinkedList<Integer> speeds = new LinkedList<>();
-        times.add(0); times.add(10); times.add(20); times.add(30); times.add(40);
-        speeds.add(0); speeds.add(5); speeds.add(7); speeds.add(3); speeds.add(10);
-        addLink(canvas, times, speeds);
-        */
         addLink(canvas,(LinkedList<Float>) getTag(R.id.timePoint),(LinkedList<Float>) getTag(R.id.speedPoint),(float) getTag(R.id.maxTime));
     }
 
-    /*
-    public void TEST_TEST_TEST(Canvas canvas, float max_time) // TO DELETE AFTER
-    {
-        //max_time = 40; // temps total = 40s
 
-        setPoint(canvas, 0, 0, max_time); // A
-
-        setPoint(canvas, 10, 5, max_time); //B
-        setLinkAB(canvas, 0, 0, 10, 5, max_time);
-
-        setPoint(canvas, 20, 7, max_time);
-        setLinkAB(canvas, 10, 5, 20, 7, max_time);
-
-        setPoint(canvas, 30, 3, max_time);
-        setLinkAB(canvas, 20, 7, 30, 3, max_time);
-
-        setPoint(canvas, 40, 10, max_time);
-        setLinkAB(canvas, 30, 3, 40, 10, max_time);
-    }
-    */
 
     public void addLink(Canvas canvas, LinkedList<Float> Times, LinkedList<Float> Speeds, float max_time)
     {
