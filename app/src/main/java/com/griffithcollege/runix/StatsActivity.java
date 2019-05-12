@@ -1,10 +1,12 @@
 package com.griffithcollege.runix;
 
+import android.content.ContentProvider;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.LinkedList;
 
 public class StatsActivity extends MainActivity
 {
@@ -29,6 +32,9 @@ public class StatsActivity extends MainActivity
     DataGPS data;
     Statistics stats;
     DecimalFormat df;
+
+    // TEST
+    //private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,11 +61,51 @@ public class StatsActivity extends MainActivity
         data = parser.readGPX(filename);
         stats = new Statistics(data);
 
+        GraphView();
+
         // Set up TextView & Data
         AverageSpeed();
         TotalDistance();
         TimeTaken();
         Altitude();
+    }
+
+    public LinkedList<Integer> getTimes() // return a LinkedList with all times values
+    {
+        // À remplacer avec la bonne liste
+        LinkedList<Integer> times = new LinkedList<>();
+        times.add(0); times.add(10); times.add(20); times.add(30); times.add(40);
+
+        return times;
+    } // for the graph
+
+    public LinkedList<Integer> getSpeeds() // return a LinkedList with all speeds values
+    {
+        // À remplacer avec la bonne liste
+        LinkedList<Integer> speeds = new LinkedList<>();
+        speeds.add(0); speeds.add(5); speeds.add(7); speeds.add(3); speeds.add(10);
+
+        return speeds;
+    } // for the graph
+
+    public float getMaxTime() // return the maximum time
+    {
+        //float timetaken = stats.timeTaken();
+        //return timetaken;
+
+        return 40; //test
+    } // for the graph
+
+
+    public Canvas getCanvas()
+    {
+        return new Canvas();
+    }
+
+    public void GraphView()
+    {
+        com.griffithcollege.runix.Graph GraphView = findViewById(R.id.GraphCustomView);
+        GraphView.addLink(getCanvas(), getTimes(), getSpeeds(), getMaxTime());
     }
 
     public void ToolbarStat()
@@ -84,7 +130,7 @@ public class StatsActivity extends MainActivity
 
     public void AverageSpeed()
     {
-        String averagespeed = df.format(stats.averageSpeed()); // TO FIX
+        String averagespeed = df.format(stats.averageSpeed());
         //----//
         String averagespeed_str = "Average Speed : "+averagespeed+" Km/h";
         SpannableString averagespeed_str_4textview =  new SpannableString(averagespeed_str);
@@ -96,7 +142,7 @@ public class StatsActivity extends MainActivity
 
     public void TotalDistance()
     {
-        String totaldistance = String.valueOf(stats.totalDistance().intValue()); // TO FIX
+        String totaldistance = String.valueOf(stats.totalDistance().intValue());
         //----//
         String totaldistance_str = "Total Distance\n "+totaldistance+" m";
         SpannableString totaldistance_str_4textview =  new SpannableString(totaldistance_str);
@@ -107,7 +153,7 @@ public class StatsActivity extends MainActivity
 
     public void TimeTaken()
     {
-        String timetaken = stats.timeTaken().toString(); // TO FIX
+        String timetaken = stats.timeTaken().toString();
         //----//
         TextView textView_TimeTaken = findViewById(R.id.TimeTaken);
         TextView time_x = findViewById(R.id.time_x);
@@ -117,8 +163,8 @@ public class StatsActivity extends MainActivity
 
     public void Altitude()
     {
-        String alti_max = df.format(stats.maximumAltitude()); // TO FIX
-        String alti_min = df.format(stats.minimumAltitude()); // TO FIX
+        String alti_max = df.format(stats.maximumAltitude());
+        String alti_min = df.format(stats.minimumAltitude());
         //----//
         TextView altitude = findViewById(R.id.Altitude);
         altitude.setText("Altitude max :"+alti_max+" m"+"\nAltitude min :"+alti_min+" m");

@@ -52,11 +52,11 @@ public class Graph extends View
         draw_yPoint(canvas);
 
         // TESTS
-        StatsActivity stats = new StatsActivity();
-        LinkedList<Integer> times = stats.getTimes();
-        LinkedList<Integer> speeds = stats.getSpeeds();
-        float max_time = stats.getMaxTime();
-        addLink(canvas, times, speeds, max_time);
+        //StatsActivity stats = new StatsActivity();
+        //LinkedList<Integer> times = stats.getTimes();
+        //LinkedList<Integer> speeds = stats.getSpeeds();
+        //float max_time = stats.getMaxTime();
+        //addLink(canvas, times, speeds, max_time);
 
         //--- TEST ---//
         //TEST_TEST_TEST(canvas);
