@@ -80,7 +80,7 @@ public class Statistics
     public LinkedList<Float> timePoint(){
         LinkedList<Float> timePoint = new LinkedList<>();
         timePoint.add(0f);
-        for (int i = 0; i < data.size(); i++) {
+        for (int i = 1; i < data.size(); i++) {
             timePoint.add(timeBetweenCurrentAndFirstPoints(i));
         }
         return timePoint;
@@ -99,7 +99,7 @@ public class Statistics
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
         LinkedList<Float> timeSpeed = new LinkedList<>();
-        for (int i = 1; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             timeSpeed.add(Float.valueOf(df.format(data.get(i).getmSpeed())));
         }
         return timeSpeed;
