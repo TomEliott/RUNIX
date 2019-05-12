@@ -21,9 +21,9 @@ public class Statistics
         return (sumSpeed/data.size());
   }
 
-    public Long timeTaken()
+    public Float timeTaken()
     {
-        return ((data.get(data.size()-1).getmTime().getTime() - data.get(0).getmTime().getTime())/1000);
+        return (timeBetweenCurrentAndFirstPoints(data.size()-1));
     }
 
     public Double distanceBetweenPoints(int index){

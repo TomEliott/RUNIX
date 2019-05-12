@@ -68,6 +68,7 @@ public class Graph extends View
         speeds.add(0); speeds.add(5); speeds.add(7); speeds.add(3); speeds.add(10);
         addLink(canvas, times, speeds);
         */
+        addLink(canvas,(LinkedList<Float>) getTag(R.id.timePoint),(LinkedList<Float>) getTag(R.id.speedPoint),(float) getTag(R.id.maxTime));
     }
 
     /*
@@ -91,7 +92,7 @@ public class Graph extends View
     }
     */
 
-    public void addLink(Canvas canvas, LinkedList<Integer> Times, LinkedList<Integer> Speeds, float max_time)
+    public void addLink(Canvas canvas, LinkedList<Float> Times, LinkedList<Float> Speeds, float max_time)
     {
         // Times and Speeds must be the same size !
         setPoint(canvas, Times.get(0), Speeds.get(0), max_time); // Draw the first point
@@ -104,13 +105,13 @@ public class Graph extends View
         }
     }
 
-    public void setLinkAB(Canvas canvas, int timeA, int speedA, int timeB, int speedB, float max_time)
+    public void setLinkAB(Canvas canvas, float timeA, float speedA, float timeB, float speedB, float max_time)
     {
         float coeff = getWidth() / max_time;
         canvas.drawLine(timeA*coeff, speedA*50, timeB*coeff, speedB*50, paint);
     }
 
-    public void setPoint(Canvas canvas, int time, int speed, float max_time)
+    public void setPoint(Canvas canvas, float time, float speed, float max_time)
     {
         float coeff = getWidth() / max_time;
         float position_x = time*coeff;

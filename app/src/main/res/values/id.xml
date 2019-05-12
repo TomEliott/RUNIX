@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="speedPoint" />
+    <item type="id" name="timePoint" />
+    <item type="id" name="maxTime" />
+</resources>

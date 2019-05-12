@@ -60,52 +60,21 @@ public class StatsActivity extends MainActivity
         parser = new GPXParser();
         data = parser.readGPX(filename);
         stats = new Statistics(data);
+        
+        final View graph = (View) findViewById(R.id.GraphCustomView);
+        graph.setTag(R.id.timePoint,stats.timePoint());
+        graph.setTag(R.id.speedPoint,stats.speedPoint());
+        graph.setTag(R.id.maxTime,stats.timeTaken());
 
-        GraphView();
+        Canvas canvas = new Canvas();
+
+        graph.draw(canvas);
 
         // Set up TextView & Data
         AverageSpeed();
         TotalDistance();
         TimeTaken();
         Altitude();
-    }
-
-    public LinkedList<Integer> getTimes() // return a LinkedList with all times values
-    {
-        // À remplacer avec la bonne liste
-        LinkedList<Integer> times = new LinkedList<>();
-        times.add(0); times.add(10); times.add(20); times.add(30); times.add(40);
-
-        return times;
-    } // for the graph
-
-    public LinkedList<Integer> getSpeeds() // return a LinkedList with all speeds values
-    {
-        // À remplacer avec la bonne liste
-        LinkedList<Integer> speeds = new LinkedList<>();
-        speeds.add(0); speeds.add(5); speeds.add(7); speeds.add(3); speeds.add(10);
-
-        return speeds;
-    } // for the graph
-
-    public float getMaxTime() // return the maximum time
-    {
-        //float timetaken = stats.timeTaken();
-        //return timetaken;
-
-        return 40; //test
-    } // for the graph
-
-
-    public Canvas getCanvas()
-    {
-        return new Canvas();
-    }
-
-    public void GraphView()
-    {
-        com.griffithcollege.runix.Graph GraphView = findViewById(R.id.GraphCustomView);
-        GraphView.addLink(getCanvas(), getTimes(), getSpeeds(), getMaxTime());
     }
 
     public void ToolbarStat()

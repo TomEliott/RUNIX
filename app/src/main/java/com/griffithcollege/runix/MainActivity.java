@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -274,7 +275,7 @@ public class MainActivity extends AppCompatActivity
 
     public void gpsStart()
     {
-        gps = new GPSLocationListener();
+        gps = new GPSLocationListener(lm);
         try
         {
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 5, gps);
@@ -287,8 +288,15 @@ public class MainActivity extends AppCompatActivity
 
     public void gpsStop()
     {
-        lm.removeUpdates(gps);
-        parser.writeGPX(gps.getData(),filename);
-        gps = null;
+        try
+        {
+            lm.removeUpdates(gps);
+            parser.writeGPX(gps.getData(),filename);
+            gps = null;
+        }
+        catch (SecurityException se)
+        {
+            se.printStackTrace();
+        }
     }
 }
