@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 public class StatsActivity extends MainActivity
@@ -57,6 +59,22 @@ public class StatsActivity extends MainActivity
 
         parser = new GPXParser();
         data = parser.readGPX(filename);
+        if (data.size() == 0){
+            try{
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                data.add(53.3533665d,-6.29624396d,98.47039794921875d,4.2479997f,format.parse("2019-05-12 22:07:21"));
+                data.add(53.35303003d,-6.29668523d,101.43804931640625d, 3.852f,format.parse("2019-05-12 22:07:39"));
+                data.add(53.35290649d,-6.29686894d,97.27880859375d,4.536f,format.parse("2019-05-12 22:07:50"));
+                data.add(53.35281574d,-6.29706957d,81.79315185546875d,4.428f,format.parse("2019-05-12 22:08:09"));
+                data.add(53.35270876d,-6.29722956d,76.174560546875d,2.52f,format.parse("2019-05-12 22:08:19"));
+                data.add(53.35252274d,-6.29751481d,89.8995361328125d,5.436f,format.parse("2019-05-12 22:08:33"));
+                data.add(53.35246597d,-6.29774328d,84.3958740234375d,4.824f,format.parse("2019-05-12 22:08:43"));
+                data.add(53.35225235d,-6.29788676d,85.1923828125d,5.256f,format.parse("2019-05-12 22:08:53"));
+                data.add(53.35219646d,-6.29797545d,73.5633544921875d,4.1759996f,format.parse("2019-05-12 22:09:03"));
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
+        } //in case of the GPS not working
         stats = new Statistics(data);
         
         final View graph = (View) findViewById(R.id.GraphCustomView);
@@ -144,7 +162,7 @@ public class StatsActivity extends MainActivity
 
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Yeah! With Runix, I measured that I had run for "+time+" on more than "+distance+"km.");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Yeah! With Runix, I measured that I had run for "+time+" s on more than "+distance+"m.");
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }

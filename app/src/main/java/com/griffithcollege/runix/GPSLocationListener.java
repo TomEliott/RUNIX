@@ -11,7 +11,6 @@ import java.util.Date;
 public class GPSLocationListener implements  LocationListener {
 
     private DataGPS data;
-    private LocationManager lm;
 
     /**
      * The constructor of the GPSLocationListener create a new DataGPS, and take in argument

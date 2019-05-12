@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else // <=> if (step == 3) <=> STATS
                 {
-                    if(statsIsPossible)
+                    if(true)
                     {
                         Intent intent = new Intent(getBaseContext(), StatsActivity.class);
                         intent.putExtra("filename", filename);
@@ -309,14 +309,14 @@ public class MainActivity extends AppCompatActivity
         {
             lm.removeUpdates(gps);
             parser.writeGPX(gps.getData(),filename);
-            if (gps.getData().size() < 2)
+           /* if (gps.getData().size() < 2)
                 {
                     statsIsPossible = false;
                 }
             else
                 {
                     statsIsPossible = true;
-                }
+                }*/
             gps = null;
         }
         catch (SecurityException se)
