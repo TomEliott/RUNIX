@@ -1,7 +1,9 @@
 package com.griffithcollege.runix;
 
+import android.app.AlertDialog;
 import android.content.ContentProvider;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -61,6 +63,7 @@ public class StatsActivity extends MainActivity
         data = parser.readGPX(filename);
         if (data.size() == 0){
             try{
+                alertGPS("GPS","The result depends on the quality of the gps signal, the app also need access to your storage and location");
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 data.add(53.3533665d,-6.29624396d,98.47039794921875d,4.2479997f,format.parse("2019-05-12 22:07:21"));
                 data.add(53.35303003d,-6.29668523d,101.43804931640625d, 3.852f,format.parse("2019-05-12 22:07:39"));
@@ -261,5 +264,19 @@ public class StatsActivity extends MainActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    public void alertGPS(String title, String message) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(title);
+        alert.setMessage(message);
+
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        alert.show();
     }
 }
