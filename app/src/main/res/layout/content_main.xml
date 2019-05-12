@@ -26,15 +26,15 @@
     <TextView
         android:id="@+id/Status"
         android:layout_width="253dp"
-        android:layout_height="87dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/time_rectangle"
         android:gravity="center"
         android:padding="8dp"
         android:text="To start a new running activity, click on ▶︎"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        android:textSize="17dp" />
 
 </LinearLayout>
