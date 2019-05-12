@@ -25,8 +25,6 @@ import java.util.LinkedList;
 
 public class StatsActivity extends MainActivity
 {
-    final String distance = "";
-    final String time = "";
     String filename;
     GPXParser parser;
     DataGPS data;
@@ -50,7 +48,7 @@ public class StatsActivity extends MainActivity
             @Override
             public void onClick(View view)
             {
-                share(distance, time);
+                share();
             }
         });
 
@@ -139,8 +137,11 @@ public class StatsActivity extends MainActivity
         altitude.setText("Altitude max :"+alti_max+" m"+"\nAltitude min :"+alti_min+" m");
     }
 
-    public void share(String distance, String time)
+    public void share()
     {
+        String time = stats.timeTaken().toString();
+        String distance = String.valueOf(stats.totalDistance().intValue());
+
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Yeah! With Runix, I measured that I had run for "+time+" on more than "+distance+"km.");
@@ -221,7 +222,7 @@ public class StatsActivity extends MainActivity
         }
         else if (id == R.id.nav_share) // SHARE
         {
-            share(distance, time);
+            share();
             return true;
         }
         else if (id == R.id.nav_settings) // SETTINGS

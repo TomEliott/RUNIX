@@ -10,7 +10,7 @@
             android:title="Home" />
         <item
             android:id="@+id/nav_stats"
-            android:icon="@android:drawable/ic_input_get"
+            android:icon="@drawable/ic_stats"
             android:title="Stats" />
         <item
             android:id="@+id/nav_tips"

@@ -9,5 +9,5 @@
         android:bottom="2dp" />
     <corners android:radius="5dp" />
 
-    <solid android:color="@color/colorPrimary" />
+    <solid android:color="@color/design_default_color_primary_dark" />
 </shape>

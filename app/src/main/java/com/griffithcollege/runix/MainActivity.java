@@ -61,11 +61,8 @@ public class MainActivity extends AppCompatActivity
         ToolbarMain(); // Generation of Main's Toolbar
 
         final FloatingActionButton start = (FloatingActionButton) findViewById(R.id.start);
-        //final FloatingActionButton stop = (FloatingActionButton) findViewById(R.id.stop);
         final TextView status = findViewById(R.id.Status);
-
         start.setClickable(true);
-        //stop.setClickable(false);
 
         start.setOnClickListener(new View.OnClickListener()
         {
@@ -81,8 +78,6 @@ public class MainActivity extends AppCompatActivity
                                         + "name to personalize RUNIX's experience.");
                         usernameChanged = true;
                     }
-
-                    // Chrono + Status
                     RunixChrono.setBase(SystemClock.elapsedRealtime());
                     Date c = Calendar.getInstance().getTime();
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -90,8 +85,6 @@ public class MainActivity extends AppCompatActivity
                     filename = formattedDate + ".gpx";
                     gpsStart();
                     RunixChrono.start();
-                    //start.setClickable(false);
-                    //stop.setClickable(true);
                     status.setText("Running activity in progress...");
 
                     start.setImageResource(R.drawable.ic_pause); // CHANGE ICON TO STOP
@@ -101,15 +94,12 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if (step == 1) // <=> STOP
                 {
-                    // Status + Chrono + Buttons
                     gpsStop();
-                    //start.setClickable(true);
-                    //stop.setClickable(false);
                     RunixChrono.stop();
                     String time = RunixChrono.getText().toString();
                     RunixChrono.setBase(SystemClock.elapsedRealtime());
 
-                    start.setImageResource(R.drawable.ic_menu_share); // CHANGE ICON (for stats)
+                    start.setImageResource(R.drawable.ic_stats); // CHANGE ICON (for stats)
 
                     // Last update (from navigation tab)
                     TextView last_training = findViewById(R.id.LastTrainingTextView);
@@ -137,33 +127,6 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });
-
-        /*
-        stop.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                // Status + Chrono + Buttons
-                gpsStop();
-                start.setClickable(true);
-                stop.setClickable(false);
-                RunixChrono.stop();
-                String time = RunixChrono.getText().toString();
-                RunixChrono.setBase(SystemClock.elapsedRealtime());
-                start.setImageResource(R.drawable.ic_restart); // For the next restart
-
-                // Last update (from navigation tab)
-                TextView last_training = findViewById(R.id.LastTrainingTextView);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm");
-                String current_time = sdf.format(new Date());
-                last_training.setText("Last running : "+current_time);
-                status.setText("Last running time : "+time);
-
-                isReady = true;
-            }
-        });
-        */
     }
 
     public void ToolbarMain()
@@ -278,10 +241,17 @@ public class MainActivity extends AppCompatActivity
             // From MainActivity to StatsActivity
             if (isReady)
             {
-                Intent intent = new Intent(getBaseContext(), StatsActivity.class);
-                intent.putExtra("filename", filename);
-                finish();
-                startActivity(intent);
+                if(statsIsPossible)
+                {
+                    Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                    intent.putExtra("filename", filename);
+                    finish();
+                    startActivity(intent);
+                }
+                else {
+                    alertNoData("ALERT","You haven't moved, please move");
+                    step = 0;
+                }
             }
             else
             {
