@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     String user = "Anonymous";
     String filename;
     GPXParser parser;
+    boolean statsIsPossible;
 
     int step = 0;
 
@@ -122,10 +123,17 @@ public class MainActivity extends AppCompatActivity
                 }
                 else // <=> if (step == 3) <=> STATS
                 {
-                    Intent intent = new Intent(getBaseContext(), StatsActivity.class);
-                    intent.putExtra("filename", filename);
-                    finish();
-                    startActivity(intent);
+                    if(statsIsPossible)
+                    {
+                        Intent intent = new Intent(getBaseContext(), StatsActivity.class);
+                        intent.putExtra("filename", filename);
+                        finish();
+                        startActivity(intent);
+                    } else {
+                        alertNoData("ALERT","You haven't moved, please move");
+                        step = 0;
+                        start.setImageResource(R.drawable.ic_restart);
+                    }
                 }
             }
         });
@@ -331,11 +339,33 @@ public class MainActivity extends AppCompatActivity
         {
             lm.removeUpdates(gps);
             parser.writeGPX(gps.getData(),filename);
+            if (gps.getData().size() < 2)
+                {
+                    statsIsPossible = false;
+                }
+            else
+                {
+                    statsIsPossible = true;
+                }
             gps = null;
         }
         catch (SecurityException se)
         {
             se.printStackTrace();
         }
+    }
+
+    public void alertNoData(String title, String message) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(title);
+        alert.setMessage(message);
+
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        alert.show();
     }
 }
